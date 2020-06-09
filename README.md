@@ -11,6 +11,10 @@ Sample Throttle Lever
 
 Proteus v7 ISIS Circuite
 
+![2](https://user-images.githubusercontent.com/47052707/84172390-9f1b6880-aa84-11ea-99ec-5cb145598cad.png)
+
+Driver Create :) and add Myproject.c
+
 ![1](https://user-images.githubusercontent.com/47052707/84160611-0af6d480-aa77-11ea-9fdd-41ff76f1a4dd.png)
 
 Full (%100) Throttle
