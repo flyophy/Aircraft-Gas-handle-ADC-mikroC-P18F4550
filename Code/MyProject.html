@@ -1,0 +1,85 @@
+Version:0.9
+StartHTML:0000000105
+EndHTML:0000013106
+StartFragment:0000001499
+EndFragment:0000013090
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>mikroIDE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+body { font-family: Courier New; font-size: 14pt; }
+.cpp1-activecomment { color: #3399FF; font-style: italic; text-decoration: underline; }
+.cpp1-assembler { color: #FF0000; }
+.cpp1-binary { color: #800000; }
+.cpp1-character { color: #808000; }
+.cpp1-comment { color: #008000; font-style: italic; }
+.cpp1-float { color: #800000; }
+.cpp1-hexadecimal { color: #008000; }
+.cpp1-identifier { color: #000000; }
+.cpp1-illegalchar { color: #FF0000; }
+.cpp1-imagelink { color: #800080; font-style: italic; text-decoration: underline; }
+.cpp1-number { color: #008000; }
+.cpp1-octal { color: #0000FF; }
+.cpp1-preprocessor { color: #8000FF; font-style: italic; }
+.cpp1-reservedword { color: #000000; font-weight: bold; }
+.cpp1-space { color: #F0F0F0; }
+.cpp1-string { color: #0000FF; }
+.cpp1-symbol { color: #000000; }
+.cpp1-weblink { color: #3399FF; font-style: italic; text-decoration: underline; }
+-->
+</style>
+</head>
+<body>
+<!--StartFragment--><pre><code><span class="cpp1-reservedword">unsigned</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">char</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">readbuff[</span><span class="cpp1-number">64</span><span class="cpp1-symbol">]</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">absolute</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x500</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//&nbsp;Buffers&nbsp;should&nbsp;be&nbsp;in&nbsp;USB&nbsp;RAM,&nbsp;please&nbsp;consult&nbsp;datasheet
+</span><span class="cpp1-reservedword">unsigned</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">char</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">64</span><span class="cpp1-symbol">]</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">absolute</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x540</span><span class="cpp1-symbol">;
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">oku=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-reservedword">char</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">binler,yuzler,onlar,birler;
+
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">interrupt()
+{
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">USB_Interrupt_Proc();</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//&nbsp;USB&nbsp;servicing&nbsp;is&nbsp;done&nbsp;inside&nbsp;the&nbsp;interrupt
+</span><span class="cpp1-symbol">}
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">main(</span><span class="cpp1-reservedword">void</span><span class="cpp1-symbol">)
+{
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">ADC_Init();
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">HID_Enable(&amp;readbuff,&amp;writebuff);</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//&nbsp;Enable&nbsp;HID&nbsp;communication
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(</span><span class="cpp1-number">1</span><span class="cpp1-symbol">){
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">oku=ADC_Read(</span><span class="cpp1-number">0</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">200</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">300</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">2</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">2</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">400</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">3</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">3</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">500</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">4</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">4</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">600</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">5</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">5</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">700</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">6</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">6</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">800</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">7</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">7</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">900</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">8</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">8</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(oku&gt;</span><span class="cpp1-number">1000</span><span class="cpp1-symbol">)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">9</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'-'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-reservedword">else</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">9</span><span class="cpp1-symbol">]=</span><span class="cpp1-character">'&nbsp;'</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">10</span><span class="cpp1-symbol">]=</span><span class="cpp1-number">13</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">writebuff[</span><span class="cpp1-number">11</span><span class="cpp1-symbol">]=</span><span class="cpp1-number">10</span><span class="cpp1-symbol">;
+
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">HID_Write(&amp;writebuff,</span><span class="cpp1-number">64</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">delay_ms(</span><span class="cpp1-number">1</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span><span class="cpp1-symbol">}
+}
+</span></code></pre><!--EndFragment--></body>
+</html>
