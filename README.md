@@ -25,4 +25,4 @@ Full (%100) Throttle
 
 ![3](https://user-images.githubusercontent.com/47052707/84160667-1ba74a80-aa77-11ea-87c1-4eeddcba1c11.png)
 
-%15 Throttle
+%10 Throttle
